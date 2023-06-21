@@ -1,0 +1,59 @@
+{% extends 'create.html' %}
+{% block content %}
+{% include 'navbar.html' %}
+
+
+<h2>Preference Based Budget Allocation</h2>
+Special Problem: Preference based budget allocation using Multilevel Parsimonious Analytic Hierarchy Process and Linear Optimization
+<hr style = "border-color:black" />
+
+<div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Select Budget Categories</h5>
+            <form method="POST" action="{% url 'home' %}">
+                {% csrf_token %}
+                <div class="col d-flex justify-content-start">
+                    <button type="submit" class="btn btn-outline-primary">Select</button>
+                </div>
+                <hr/>
+                <div class="container-sm container-border">
+                    <div class="row">
+                        {%for i in types%}
+                        <div class="col-md-auto">
+                            <div class="form-check">
+                                {%if menu%}
+                                {%if i.name|lower in menu|lower%}
+                                <input class="form-check-input" name="typecheck" type="checkbox" value={{i.id}} id={{i}} checked>
+                                <label class="form-check-label" for={{i}}>
+                                  {{i}}
+                                </label>
+                                {% else %}
+                                <input class="form-check-input" name="typecheck" type="checkbox" value={{i.id}} id={{i}}>
+                                <label class="form-check-label" for={{i}}>
+                                  {{i}}
+                                </label>
+                                {% endif %}
+                                {% else %}<input class="form-check-input" name="typecheck" type="checkbox" value={{i.id}} id={{i}}>
+                                <label class="form-check-label" for={{i}}>
+                                  {{i}}
+                                </label>
+                                {% endif %}
+                                
+                        
+                            </div>       
+                        </div>
+                        {%endfor%}
+                        
+                    </div>
+                    
+                </div> 
+            </form>
+        </div>
+      </div>
+    </div>
+    {% block menu%}
+    {% endblock %}
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'create.html' %}
+{% block content %}
+{% include 'navbar.html' %}
+<br/> <br/>
+{% for item in all%}
+    <hr>
+    {{item.name}} <br/>
+    Items: {{item.names}} <br/>
+    Allocations: {{item.values}} <br/>
+    Monthly Income: {{item.income}} <br/>
+    Final Allocation: {{item.final_allocation}}
+{% endfor%}
+{% endblock %}

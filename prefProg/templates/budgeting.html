@@ -1,0 +1,33 @@
+{% extends 'create.html' %}
+
+{% block content %}
+{% include 'navbar.html' %}
+<h2>Preference Based Budget Allocation</h2>
+Special Problem: Preference based budget allocation using Multilevel Parsimonious Analytic Hierarchy Process and Linear Optimization
+<hr style = "border-color:black" />
+
+
+<div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Allocate Monthly Budget</h5>
+            <hr/>
+ 
+            <form method="POST" action="{% url 'budgeting' %}" class="was-validated">
+                {% csrf_token %}
+                {% for i in menu %}
+                <div class="form-group">
+                    {{i}}<input type="number" step="0.01" class="form-control" aria-describedby="emailHelp" name="allocation" required>
+                </div>
+                {% endfor %}
+                <br/>
+                <button type="submit" class="btn btn-outline-primary">Compute</button>
+            </form>
+        </div>
+      </div>
+    </div>
+    {% block menu%}
+    {% endblock %}
+</div>
+{% endblock %}
